@@ -4,8 +4,10 @@ import com.Matheus.GestaoFinanceira.Exceptions.User.IdNotFoundException;
 import com.Matheus.GestaoFinanceira.User.controller.DTOs.UserRequest;
 import com.Matheus.GestaoFinanceira.User.entity.User;
 import com.Matheus.GestaoFinanceira.User.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -13,16 +15,18 @@ import java.util.UUID;
 public class UserService {
 
     private final UserRepository repository;
+    private final PasswordEncoder encoder;
 
-    public UserService(UserRepository repository) {
+    public UserService(UserRepository repository, PasswordEncoder encoder) {
         this.repository = repository;
+        this.encoder = encoder;
     }
 
     public User createUser(UserRequest request){
         User user = new User();
         user.setName(request.name());
         user.setEmail(request.email());
-        user.setPassword(request.password());
+        user.setPassword(encoder.encode(request.password()));
 
         return repository.save(user);
     }
@@ -31,7 +35,12 @@ public class UserService {
         return repository.readAll();
     }
 
-    public Set<User> showUsersByName(String name){
+    public User showUserById(UUID id){
+        return repository.findById(id)
+                .orElseThrow(() -> new IdNotFoundException(id));
+    }
+
+    public List<User> showUsersByName(String name){
         return repository.findUserByNameContainingIgnoreCase(name);
     }
 
@@ -46,7 +55,7 @@ public class UserService {
             userSave.setName(user.name());
         }
         if (!user.password().isBlank()){
-            userSave.setPassword(user.password());
+            userSave.setPassword(encoder.encode(user.password()));
         }
             return repository.save(userSave);
     }

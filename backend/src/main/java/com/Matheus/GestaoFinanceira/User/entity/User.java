@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
@@ -26,6 +27,15 @@ public class User {
 
     @Column
     private String email;
+
+    @Column
+    private BigDecimal balance;
+
+    @OneToMany(mappedBy = "")
+    private Object despesas;
+
+    @OneToMany(mappedBy = "")
+    private Object receita;
 
     @Column
     private String password;

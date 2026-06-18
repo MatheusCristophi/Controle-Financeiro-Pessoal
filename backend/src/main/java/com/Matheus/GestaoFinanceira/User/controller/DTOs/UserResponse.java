@@ -9,10 +9,10 @@ public record UserResponse(@NotBlank
                            @Email
                            String email) {
 
-    public static User toUser(UserResponse response){
-        return new User(
-                response.name,
-                response.email
+    public static UserResponse toUser(User user){
+        return new UserResponse(
+                user.getName(),
+                user.getEmail()
         );
     }
 }
