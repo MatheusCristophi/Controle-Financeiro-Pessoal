@@ -20,6 +20,21 @@ public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "user_id")
     private UUID id;
-    
 
+    @Column
+    private String name;
+
+    @Column
+    private String email;
+
+    @Column
+    private String password;
+
+    @Column(name = "user_role", length = 25)
+    private Roles role;
+
+    public User(String name, String email){
+        this.name = name;
+        this.email = email;
+    }
 }
