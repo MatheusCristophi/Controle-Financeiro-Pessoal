@@ -1,5 +1,5 @@
 package com.Matheus.GestaoFinanceira.User.entity;
 
 public enum Roles {
-    USER, ADMIN,
+    ROLE_USER, ROLE_ADMIN,
 }
