@@ -2,6 +2,8 @@ package com.Matheus.GestaoFinanceira.Transactions.service;
 
 import com.Matheus.GestaoFinanceira.Exceptions.User.IdNotFoundException;
 import com.Matheus.GestaoFinanceira.Transactions.Controller.DTOs.TransactionRequest;
+import com.Matheus.GestaoFinanceira.Transactions.entity.Expenses;
+import com.Matheus.GestaoFinanceira.Transactions.entity.Income;
 import com.Matheus.GestaoFinanceira.Transactions.entity.Transaction;
 import com.Matheus.GestaoFinanceira.Transactions.repository.TransactionRepository;
 import com.Matheus.GestaoFinanceira.User.entity.User;
@@ -20,28 +22,54 @@ public class TransactionService {
         this.repository = repository;
     }
 
+    //Todas independente do tipo
     public List<Transaction> getAllTransactions(User user){
-        return repository.findByUserId(user.getId());
+        return repository.findAllByUserId(user.getId());
     }
 
+    //busca pelo id independente do tipo
     public Transaction getTransactionById(UUID id){
         return repository.findById(id)
                 .orElseThrow(() -> new IdNotFoundException(id));
     }
 
-    public Transaction createTransaction(TransactionRequest request, User user) {
-        Transaction transaction = new Transaction();
+    public List<Transaction> getAllIncomes(){
+        return repository.findAllWithTransactionType("INCOMES");
+    }
+
+    //retornar todas despesas
+    public List<Transaction> getAllExpenses(){
+        return repository.findAllWithTransactionType("EXPENSES");
+    }
+
+    public Income createIncomes(TransactionRequest request, User user) {
+        Income income = new Income();
 
 
-        transaction.setDescription(request.description());
-        transaction.setCategory(request.category());
-        transaction.setUser(user);
-        transaction.setValue(request.value());
-        transaction.setPaymentMethod(request.paymentMethods());
-        transaction.setCreatedAt(LocalDate.now());
-        transaction.setUpdateAt(null);
+        income.setDescription(request.description());
+        income.setCategory(request.category());
+        income.setUser(user);
+        income.setValue(request.value());
+        income.setPaymentMethod(request.paymentMethods());
+        income.setCreatedAt(LocalDate.now());
+        income.setUpdateAt(null);
 
-        return repository.save(transaction);
+        return repository.save(income);
+    }
+
+    public Expenses createExpenses(TransactionRequest request, User user) {
+        Expenses expenses = new Expenses();
+
+
+        expenses.setDescription(request.description());
+        expenses.setCategory(request.category());
+        expenses.setUser(user);
+        expenses.setValue(request.value());
+        expenses.setPaymentMethod(request.paymentMethods());
+        expenses.setCreatedAt(LocalDate.now());
+        expenses.setUpdateAt(null);
+
+        return repository.save(expenses);
     }
 
     public Transaction updateTransaction(UUID id, TransactionRequest request, User user) {

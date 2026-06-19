@@ -33,7 +33,7 @@ public class Transaction {
     @Column(nullable = false, length = 200)
     private String description;
 
-    @Column(nullable = false)
+    @Column(nullable = false, precision = 19, scale = 2)
     private BigDecimal value;
 
     @Column(nullable = false)
