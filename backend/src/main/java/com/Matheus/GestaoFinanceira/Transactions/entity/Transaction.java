@@ -30,11 +30,11 @@ public class Transaction {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(nullable = false)
-    private BigDecimal value;
-
     @Column(nullable = false, length = 200)
     private String description;
+
+    @Column(nullable = false)
+    private BigDecimal value;
 
     @Column(nullable = false)
     private String category;
@@ -45,6 +45,6 @@ public class Transaction {
     @Column(nullable = false, name = "payment_method")
     private PaymentMethods paymentMethod;
 
-    @Column(name = "update_at")
+    @Column(nullable = true, name = "update_at")
     private LocalDate updateAt;
 }

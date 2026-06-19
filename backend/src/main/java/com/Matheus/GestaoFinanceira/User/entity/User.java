@@ -35,7 +35,7 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Transaction despesas;
 
-    @OneToMany(mappedBy = "")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Transaction receita;
 
     @Column(nullable = false, length = 30)

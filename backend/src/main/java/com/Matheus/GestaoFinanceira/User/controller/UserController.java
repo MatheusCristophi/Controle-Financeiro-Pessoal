@@ -6,6 +6,7 @@ import com.Matheus.GestaoFinanceira.User.entity.User;
 import com.Matheus.GestaoFinanceira.User.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -56,6 +57,7 @@ public class UserController {
     }
 
     @PutMapping("/update/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<UserResponse> updateUser(@PathVariable @RequestParam UUID id,
                                                    @RequestBody UserRequest request){
         User user = userService.updateUser(request, id);
@@ -64,6 +66,7 @@ public class UserController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteUser(@PathVariable @RequestParam UUID id){
         userService.deleteUser(id);
 
