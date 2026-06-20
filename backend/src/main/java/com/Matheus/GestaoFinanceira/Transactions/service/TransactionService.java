@@ -1,7 +1,7 @@
 package com.Matheus.GestaoFinanceira.Transactions.service;
 
-import com.Matheus.GestaoFinanceira.Exceptions.User.IdNotFoundException;
-import com.Matheus.GestaoFinanceira.Transactions.Controller.DTOs.TransactionRequest;
+import com.Matheus.GestaoFinanceira.Exceptions.global.IdNotFoundException;
+import com.Matheus.GestaoFinanceira.Transactions.Controller.DTOs.transaction.TransactionRequest;
 import com.Matheus.GestaoFinanceira.Transactions.entity.Expenses;
 import com.Matheus.GestaoFinanceira.Transactions.entity.Income;
 import com.Matheus.GestaoFinanceira.Transactions.entity.Transaction;
@@ -33,13 +33,13 @@ public class TransactionService {
                 .orElseThrow(() -> new IdNotFoundException(id));
     }
 
-    public List<Transaction> getAllIncomes(){
-        return repository.findAllWithTransactionType("INCOMES");
+    public List<Transaction> getAllIncomes(UUID id){
+        return repository.findAllWithTransactionTypeByUserId("INCOMES", id);
     }
 
     //retornar todas despesas
-    public List<Transaction> getAllExpenses(){
-        return repository.findAllWithTransactionType("EXPENSES");
+    public List<Transaction> getAllExpenses(UUID id){
+        return repository.findAllWithTransactionTypeByUserId("EXPENSES", id);
     }
 
     public Income createIncomes(TransactionRequest request, User user) {
@@ -72,7 +72,7 @@ public class TransactionService {
         return repository.save(expenses);
     }
 
-    public Transaction updateTransaction(UUID id, TransactionRequest request, User user) {
+    public Transaction updateExpenses(UUID id, TransactionRequest request, User user) {
         Transaction transactionSaved = repository.findById(id)
                 .orElseThrow(() -> new IdNotFoundException(id));
 

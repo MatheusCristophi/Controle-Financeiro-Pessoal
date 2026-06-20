@@ -1,4 +1,4 @@
-package com.Matheus.GestaoFinanceira.Transactions.Controller.DTOs;
+package com.Matheus.GestaoFinanceira.Transactions.Controller.DTOs.transaction;
 
 import com.Matheus.GestaoFinanceira.Transactions.entity.PaymentMethods;
 import jakarta.validation.constraints.NotBlank;

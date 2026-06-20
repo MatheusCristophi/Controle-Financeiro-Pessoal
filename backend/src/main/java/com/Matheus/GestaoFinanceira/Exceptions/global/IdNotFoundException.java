@@ -1,4 +1,4 @@
-package com.Matheus.GestaoFinanceira.Exceptions.User;
+package com.Matheus.GestaoFinanceira.Exceptions.global;
 
 import java.util.UUID;
 

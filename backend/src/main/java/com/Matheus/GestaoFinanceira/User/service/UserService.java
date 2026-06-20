@@ -1,6 +1,6 @@
 package com.Matheus.GestaoFinanceira.User.service;
 
-import com.Matheus.GestaoFinanceira.Exceptions.User.IdNotFoundException;
+import com.Matheus.GestaoFinanceira.Exceptions.global.IdNotFoundException;
 import com.Matheus.GestaoFinanceira.User.controller.DTOs.UserRequest;
 import com.Matheus.GestaoFinanceira.User.entity.User;
 import com.Matheus.GestaoFinanceira.User.repository.UserRepository;
