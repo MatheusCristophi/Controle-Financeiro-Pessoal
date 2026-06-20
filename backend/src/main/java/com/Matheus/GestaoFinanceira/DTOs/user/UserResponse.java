@@ -1,4 +1,4 @@
-package com.Matheus.GestaoFinanceira.User.controller.DTOs;
+package com.Matheus.GestaoFinanceira.DTOs.user;
 
 import com.Matheus.GestaoFinanceira.User.entity.User;
 import jakarta.validation.constraints.Email;

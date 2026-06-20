@@ -39,12 +39,14 @@ public class Transaction {
     @Column(nullable = false)
     private String category;
 
-    @Column(nullable = false, name = "created_at")
-    private LocalDate createdAt;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, name = "transaction_status")
+    private Status transactionStatus;
 
+    @Column(name = "transaction_date", nullable = false)
+    private LocalDate transactionDate;
+
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, name = "payment_method")
     private PaymentMethods paymentMethod;
-
-    @Column(nullable = true, name = "update_at")
-    private LocalDate updateAt;
 }

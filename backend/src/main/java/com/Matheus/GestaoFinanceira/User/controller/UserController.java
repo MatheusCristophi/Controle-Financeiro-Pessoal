@@ -1,7 +1,7 @@
 package com.Matheus.GestaoFinanceira.User.controller;
 
-import com.Matheus.GestaoFinanceira.User.controller.DTOs.UserRequest;
-import com.Matheus.GestaoFinanceira.User.controller.DTOs.UserResponse;
+import com.Matheus.GestaoFinanceira.DTOs.user.UserRequest;
+import com.Matheus.GestaoFinanceira.DTOs.user.UserResponse;
 import com.Matheus.GestaoFinanceira.User.entity.User;
 import com.Matheus.GestaoFinanceira.User.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -24,6 +24,7 @@ public class UserController {
     }
 
     @GetMapping("/all")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Set<UserResponse>> getAllUsers(){
         Set<UserResponse> allUsers = userService.showAllUser()
                 .stream()
@@ -34,13 +35,15 @@ public class UserController {
     }
 
     @GetMapping("/finduser/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<UserResponse> getUserById(@PathVariable @RequestParam UUID id){
         User user = userService.showUserById(id);
         return ResponseEntity.ok(UserResponse.toUser(user));
     }
 
-    @GetMapping("/name")
-    public ResponseEntity<List<UserResponse>> getUserWithName(@PathVariable @RequestBody String name){
+    @GetMapping("/name/{name}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<UserResponse>> getUserWithName(@PathVariable String name){
         List<UserResponse> users = userService.showUsersByName(name)
                 .stream()
                 .map(UserResponse::toUser)

@@ -1,6 +1,7 @@
-package com.Matheus.GestaoFinanceira.Transactions.Controller.DTOs.transaction;
+package com.Matheus.GestaoFinanceira.DTOs.transaction;
 
 import com.Matheus.GestaoFinanceira.Transactions.entity.PaymentMethods;
+import com.Matheus.GestaoFinanceira.Transactions.entity.Status;
 import com.Matheus.GestaoFinanceira.Transactions.entity.Transaction;
 
 import java.math.BigDecimal;
@@ -10,8 +11,8 @@ public record TransactionResponse(String description,
                                   BigDecimal value,
                                   String category,
                                   PaymentMethods paymentMethods,
-                                  LocalDate createdAt,
-                                  LocalDate updateAt) {
+                                  Status transactionStatus,
+                                  LocalDate transactionDate) {
 
     public static TransactionResponse toTransaction(Transaction transaction){
         return new TransactionResponse(
@@ -19,8 +20,8 @@ public record TransactionResponse(String description,
                 transaction.getValue(),
                 transaction.getCategory(),
                 transaction.getPaymentMethod(),
-                transaction.getCreatedAt(),
-                transaction.getUpdateAt()
+                transaction.getTransactionStatus(),
+                transaction.getTransactionDate()
         );
     }
 }

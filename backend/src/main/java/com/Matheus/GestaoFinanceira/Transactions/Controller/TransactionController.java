@@ -1,7 +1,7 @@
 package com.Matheus.GestaoFinanceira.Transactions.Controller;
 
-import com.Matheus.GestaoFinanceira.Transactions.Controller.DTOs.transaction.TransactionRequest;
-import com.Matheus.GestaoFinanceira.Transactions.Controller.DTOs.transaction.TransactionResponse;
+import com.Matheus.GestaoFinanceira.DTOs.transaction.TransactionRequest;
+import com.Matheus.GestaoFinanceira.DTOs.transaction.TransactionResponse;
 import com.Matheus.GestaoFinanceira.Transactions.service.TransactionService;
 import com.Matheus.GestaoFinanceira.User.entity.User;
 import org.springframework.http.HttpStatus;
@@ -51,7 +51,7 @@ public class TransactionController {
         return ResponseEntity.ok(transactions);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<TransactionResponse> showTransactionById(@PathVariable UUID id){
         TransactionResponse tr = TransactionResponse.toTransaction(service.getTransactionById(id));
         return ResponseEntity.ok(tr);
@@ -73,7 +73,7 @@ public class TransactionController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/update/{id}")
     public ResponseEntity<TransactionResponse> updateTransaction(@RequestBody TransactionRequest request,
                                                                  @PathVariable UUID id,
                                                                  @AuthenticationPrincipal User user

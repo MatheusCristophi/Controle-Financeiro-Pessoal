@@ -1,7 +1,7 @@
 package com.Matheus.GestaoFinanceira.Transactions.service;
 
 import com.Matheus.GestaoFinanceira.Exceptions.global.IdNotFoundException;
-import com.Matheus.GestaoFinanceira.Transactions.Controller.DTOs.transaction.TransactionRequest;
+import com.Matheus.GestaoFinanceira.DTOs.transaction.TransactionRequest;
 import com.Matheus.GestaoFinanceira.Transactions.entity.Expenses;
 import com.Matheus.GestaoFinanceira.Transactions.entity.Income;
 import com.Matheus.GestaoFinanceira.Transactions.entity.Transaction;
@@ -51,8 +51,8 @@ public class TransactionService {
         income.setUser(user);
         income.setValue(request.value());
         income.setPaymentMethod(request.paymentMethods());
-        income.setCreatedAt(LocalDate.now());
-        income.setUpdateAt(null);
+        income.setTransactionStatus(request.transactionStatus());
+        income.setTransactionDate(request.transactionDate());
 
         return repository.save(income);
     }
@@ -66,8 +66,8 @@ public class TransactionService {
         expenses.setUser(user);
         expenses.setValue(request.value());
         expenses.setPaymentMethod(request.paymentMethods());
-        expenses.setCreatedAt(LocalDate.now());
-        expenses.setUpdateAt(null);
+        expenses.setTransactionStatus(request.transactionStatus());
+        expenses.setTransactionDate(request.transactionDate());
 
         return repository.save(expenses);
     }
@@ -76,7 +76,6 @@ public class TransactionService {
         Transaction transactionSaved = repository.findById(id)
                 .orElseThrow(() -> new IdNotFoundException(id));
 
-        transactionSaved.setUser(user);
         if (!request.description().isBlank()) {
             transactionSaved.setDescription(request.description());
         }
@@ -89,7 +88,7 @@ public class TransactionService {
         if (request.paymentMethods() != null) {
             transactionSaved.setPaymentMethod(request.paymentMethods());
         }
-        transactionSaved.setUpdateAt(LocalDate.now());
+        transactionSaved.setTransactionStatus(request.transactionStatus());
 
         return repository.save(transactionSaved);
     }
