@@ -11,7 +11,6 @@ import com.Matheus.GestaoFinanceira.Transactions.repository.TransactionRepositor
 import com.Matheus.GestaoFinanceira.User.entity.User;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 

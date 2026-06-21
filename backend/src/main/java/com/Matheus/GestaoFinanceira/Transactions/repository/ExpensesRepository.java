@@ -1,7 +1,6 @@
 package com.Matheus.GestaoFinanceira.Transactions.repository;
 
 import com.Matheus.GestaoFinanceira.Transactions.entity.Expenses;
-import com.Matheus.GestaoFinanceira.User.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
