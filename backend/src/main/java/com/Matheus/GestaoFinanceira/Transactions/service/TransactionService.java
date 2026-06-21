@@ -5,6 +5,8 @@ import com.Matheus.GestaoFinanceira.DTOs.transaction.TransactionRequest;
 import com.Matheus.GestaoFinanceira.Transactions.entity.Expenses;
 import com.Matheus.GestaoFinanceira.Transactions.entity.Income;
 import com.Matheus.GestaoFinanceira.Transactions.entity.Transaction;
+import com.Matheus.GestaoFinanceira.Transactions.repository.ExpensesRepository;
+import com.Matheus.GestaoFinanceira.Transactions.repository.IncomesRepository;
 import com.Matheus.GestaoFinanceira.Transactions.repository.TransactionRepository;
 import com.Matheus.GestaoFinanceira.User.entity.User;
 import org.springframework.stereotype.Service;
@@ -16,30 +18,34 @@ import java.util.UUID;
 @Service
 public class TransactionService {
 
-    private TransactionRepository repository;
+    private TransactionRepository TRepository;
+    private ExpensesRepository ERepository;
+    private IncomesRepository IRepository;
 
-    public TransactionService(TransactionRepository repository) {
-        this.repository = repository;
+    public TransactionService(TransactionRepository TRepository, ExpensesRepository ERepository, IncomesRepository IRepository) {
+        this.TRepository = TRepository;
+        this.ERepository = ERepository;
+        this.IRepository = IRepository;
     }
 
     //Todas independente do tipo
     public List<Transaction> getAllTransactions(User user){
-        return repository.findAllByUserId(user.getId());
+        return TRepository.findAllByUserId(user.getId());
     }
 
     //busca pelo id independente do tipo
     public Transaction getTransactionById(UUID id){
-        return repository.findById(id)
+        return TRepository.findById(id)
                 .orElseThrow(() -> new IdNotFoundException(id));
     }
 
-    public List<Transaction> getAllIncomes(UUID id){
-        return repository.findAllWithTransactionTypeByUserId("INCOMES", id);
+    public List<Income> getAllIncomes(User user){
+        return IRepository.getAllIncomesByUserId(user.getId());
     }
 
     //retornar todas despesas
-    public List<Transaction> getAllExpenses(UUID id){
-        return repository.findAllWithTransactionTypeByUserId("EXPENSES", id);
+    public List<Expenses> getAllExpenses(User user){
+        return ERepository.getAllExpensesByUserId(user.getId());
     }
 
     public Income createIncomes(TransactionRequest request, User user) {
@@ -54,7 +60,7 @@ public class TransactionService {
         income.setTransactionStatus(request.transactionStatus());
         income.setTransactionDate(request.transactionDate());
 
-        return repository.save(income);
+        return TRepository.save(income);
     }
 
     public Expenses createExpenses(TransactionRequest request, User user) {
@@ -69,11 +75,11 @@ public class TransactionService {
         expenses.setTransactionStatus(request.transactionStatus());
         expenses.setTransactionDate(request.transactionDate());
 
-        return repository.save(expenses);
+        return TRepository.save(expenses);
     }
 
     public Transaction updateExpenses(UUID id, TransactionRequest request, User user) {
-        Transaction transactionSaved = repository.findById(id)
+        Transaction transactionSaved = TRepository.findById(id)
                 .orElseThrow(() -> new IdNotFoundException(id));
 
         if (!request.description().isBlank()) {
@@ -90,10 +96,10 @@ public class TransactionService {
         }
         transactionSaved.setTransactionStatus(request.transactionStatus());
 
-        return repository.save(transactionSaved);
+        return TRepository.save(transactionSaved);
     }
 
     public void deleteTransaction(UUID id){
-        repository.deleteById(id);
+        TRepository.deleteById(id);
     }
 }

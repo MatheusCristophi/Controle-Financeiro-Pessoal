@@ -14,7 +14,8 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-@RestController("/user/v1")
+@RestController
+@RequestMapping("/user/v1")
 public class UserController {
 
     private final UserService userService;
@@ -25,11 +26,11 @@ public class UserController {
 
     @GetMapping("/all")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Set<UserResponse>> getAllUsers(){
-        Set<UserResponse> allUsers = userService.showAllUser()
+    public ResponseEntity<List<UserResponse>> getAllUsers(){
+        List<UserResponse> allUsers = userService.showAllUser()
                 .stream()
                 .map(UserResponse::toUser)
-                .collect(Collectors.toSet());
+                .toList();
 
         return ResponseEntity.ok(allUsers);
     }

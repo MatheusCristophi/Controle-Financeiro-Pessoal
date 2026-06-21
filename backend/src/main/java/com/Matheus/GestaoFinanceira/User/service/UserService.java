@@ -31,8 +31,8 @@ public class UserService {
         return repository.save(user);
     }
 
-    public Set<User> showAllUser(){
-        return repository.readAll();
+    public List<User> showAllUser(){
+        return repository.findAll();
     }
 
     public User showUserById(UUID id){

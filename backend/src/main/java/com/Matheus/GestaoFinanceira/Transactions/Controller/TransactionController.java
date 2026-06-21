@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@RestController("/transaction/v1")
+@RestController
+@RequestMapping("/transaction/v1")
 public class TransactionController {
 
     private final TransactionService service;
@@ -33,7 +34,7 @@ public class TransactionController {
 
     @GetMapping("/incomes/all")
     public ResponseEntity<List<TransactionResponse>> showAllIncomes(@AuthenticationPrincipal User user){
-        List<TransactionResponse> transactions = service.getAllIncomes(user.getId())
+        List<TransactionResponse> transactions = service.getAllIncomes(user)
                 .stream()
                 .map(TransactionResponse::toTransaction)
                 .toList();
@@ -43,7 +44,7 @@ public class TransactionController {
 
     @GetMapping("/expenses/all")
     public ResponseEntity<List<TransactionResponse>> showAllExpenses(@AuthenticationPrincipal User user){
-        List<TransactionResponse> transactions = service.getAllExpenses(user.getId())
+        List<TransactionResponse> transactions = service.getAllExpenses(user)
                 .stream()
                 .map(TransactionResponse::toTransaction)
                 .toList();
@@ -73,12 +74,11 @@ public class TransactionController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/update")
     public ResponseEntity<TransactionResponse> updateTransaction(@RequestBody TransactionRequest request,
-                                                                 @PathVariable UUID id,
                                                                  @AuthenticationPrincipal User user
                                                                  ){
-        var response = TransactionResponse.toTransaction(service.updateExpenses(id, request, user));
+        var response = TransactionResponse.toTransaction(service.updateExpenses(user.getId(), request, user));
 
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
