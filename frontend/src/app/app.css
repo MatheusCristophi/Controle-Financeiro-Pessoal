@@ -50,3 +50,19 @@ body{
     background-color: rgb(58, 58, 58);
     cursor: pointer;
 }
+
+#dashboard-incomes-expenses {
+    display: flex;
+    justify-content: space-around;
+}
+
+.dashboard-card {
+    justify-items: center;
+    border: 1px solid rgb(100, 100, 100);
+    box-shadow: gray 1px 1px 1px 1px;
+    margin-top: 12vh;
+    width: 45%;
+    height: 50vh;
+}
+
+.dashboard-transaction {}
