@@ -2,7 +2,6 @@ package com.Matheus.GestaoFinanceira.User.entity;
 
 import com.Matheus.GestaoFinanceira.Transactions.entity.Expenses;
 import com.Matheus.GestaoFinanceira.Transactions.entity.Income;
-import com.Matheus.GestaoFinanceira.Transactions.entity.Transaction;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

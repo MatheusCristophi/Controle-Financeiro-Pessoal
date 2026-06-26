@@ -3,8 +3,6 @@ package com.Matheus.GestaoFinanceira.DTOs.user;
 import com.Matheus.GestaoFinanceira.Transactions.entity.Expenses;
 import com.Matheus.GestaoFinanceira.Transactions.entity.Income;
 import com.Matheus.GestaoFinanceira.User.entity.User;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
 

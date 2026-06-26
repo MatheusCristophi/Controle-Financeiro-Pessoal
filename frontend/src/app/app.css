@@ -1,9 +1,16 @@
-body{
+*{
     padding: 0;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     color: white;
     background-color: rgb(24, 24, 24);
+}
+
+#header {
+    position: sticky;
+    top: 0;
+    right: 0;
+    left: 0;
 }
 
 #nav-header {
@@ -20,18 +27,26 @@ body{
     margin-left: 10vh;
 }
 
+#nav-header h1:hover {
+    cursor: pointer;
+}
+
 #ul-header {
     display: flex;
     gap: 30px;
     margin-left: auto;
     margin-right: 10vh;
-    
+    background-color: rgb(8, 8, 8);   
 }
 
 .li-header {
     background-color: rgb(8, 8, 8);
     list-style-type: none;
     padding-left: 0px;
+}
+
+.li-header:hover {
+    cursor: pointer;
 }
 
 #logout {
@@ -62,7 +77,40 @@ body{
     box-shadow: gray 1px 1px 1px 1px;
     margin-top: 12vh;
     width: 45%;
-    height: 50vh;
+    height: 60vh;
 }
 
-.dashboard-transaction {}
+.dashboard-card div select {
+    background-color: rgb(63, 63, 63);
+    color: white;
+    margin-left: 20px;
+}
+
+
+.dashboard-transaction {
+    justify-items: center;
+    justify-self: center;
+    border: 1px solid rgb(100, 100, 100);
+    box-shadow: gray 1px 1px 1px 1px;
+    margin-top: 8vh;
+    width: 80%;
+    height: 60vh;
+}
+
+.dashboard-transaction div select {
+    background-color: rgb(63, 63, 63);
+    color: white;
+    margin-left: 20px;
+}
+
+footer {
+    height: 7vh;
+    text-align: center;
+    align-content: center;
+    margin-top: 6vh;
+    background-color: rgb(8, 8, 8);
+}
+
+footer h1 {
+    background-color: rgb(8, 8, 8);
+}

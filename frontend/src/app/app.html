@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <header>
+  <header id="header">
     <nav id="nav-header">
       <h1>Gestão Financeira</h1>
       <ul id="ul-header">
@@ -50,7 +50,17 @@
     <div>
       <section class="dashboard-transaction">
         <h1>Transações</h1>
+        <div>
+          <label for="Tempo">Mês</label>
+          <select name="Tempo" id="option-income">
+            <option value="1m">Mês Atual</option>
+            <option value="2m">Mês Anterior</option>
+          </select>
+        </div>
       </section>
+      <footer>
+        <h1>&copy; Matheus Cristophi</h1>
+      </footer>
     </div>
   </main>
 </body>
