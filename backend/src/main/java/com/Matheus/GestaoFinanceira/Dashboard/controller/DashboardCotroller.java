@@ -4,6 +4,7 @@ import com.Matheus.GestaoFinanceira.Dashboard.service.DashboardService;
 import com.Matheus.GestaoFinanceira.User.entity.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.math.BigDecimal;
 
 @RestController
-@RequestMapping("dashboard")
+@RequestMapping("dashboard/v1")
+@PreAuthorize("hasRole('USER')")
 public class DashboardCotroller {
 
     private final DashboardService service;

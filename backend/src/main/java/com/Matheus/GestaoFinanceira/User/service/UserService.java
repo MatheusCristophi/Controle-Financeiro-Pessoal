@@ -7,7 +7,6 @@ import com.Matheus.GestaoFinanceira.User.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -19,28 +18,6 @@ public class UserService {
     public UserService(UserRepository repository, PasswordEncoder encoder) {
         this.repository = repository;
         this.encoder = encoder;
-    }
-
-    public User createUser(UserRequest request){
-        User user = new User();
-        user.setName(request.name());
-        user.setEmail(request.email());
-        user.setPassword(encoder.encode(request.password()));
-
-        return repository.save(user);
-    }
-
-    public List<User> showAllUser(){
-        return repository.findAll();
-    }
-
-    public User showUserById(UUID id){
-        return repository.findById(id)
-                .orElseThrow(() -> new IdNotFoundException(id));
-    }
-
-    public List<User> showUsersByName(String name){
-        return repository.findUserByNameContainingIgnoreCase(name);
     }
 
     public User updateUser(UserRequest user, UUID id){

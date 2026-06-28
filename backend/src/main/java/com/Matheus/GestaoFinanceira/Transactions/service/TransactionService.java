@@ -77,7 +77,7 @@ public class TransactionService {
         return TRepository.save(expenses);
     }
 
-    public Transaction updateExpenses(UUID id, TransactionRequest request, User user) {
+    public Transaction updateTransaction(UUID id, TransactionRequest request, User user) {
         Transaction transactionSaved = TRepository.findById(id)
                 .orElseThrow(() -> new IdNotFoundException(id));
 

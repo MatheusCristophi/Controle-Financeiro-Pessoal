@@ -14,5 +14,13 @@ export class App {
 interface user{
   name:string;
   email:string;
-  role:'ROLE_USER'| 'ROLE_ADMIN';
+  balance:bigint;
 }
+
+function showPerfil():void{
+  perfil.innerHTML = `
+  <h3>${name}</h3>
+  `
+}
+
+let perfil = document.getElementById("perfil-user");

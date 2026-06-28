@@ -3,13 +3,10 @@ package com.Matheus.GestaoFinanceira.User.repository;
 import com.Matheus.GestaoFinanceira.User.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
 import java.util.UUID;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, UUID> {
 
-    List<User> findUserByNameContainingIgnoreCase(@RequestParam("name") String name);
 }

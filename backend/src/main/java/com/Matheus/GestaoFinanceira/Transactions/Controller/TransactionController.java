@@ -6,6 +6,7 @@ import com.Matheus.GestaoFinanceira.Transactions.service.TransactionService;
 import com.Matheus.GestaoFinanceira.User.entity.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/transaction/v1")
+@PreAuthorize("hasRole('USER')")
 public class TransactionController {
 
     private final TransactionService service;
@@ -78,7 +80,7 @@ public class TransactionController {
     public ResponseEntity<TransactionResponse> updateTransaction(@RequestBody TransactionRequest request,
                                                                  @AuthenticationPrincipal User user
                                                                  ){
-        var response = TransactionResponse.toTransaction(service.updateExpenses(user.getId(), request, user));
+        var response = TransactionResponse.toTransaction(service.updateTransaction(user.getId(), request, user));
 
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
