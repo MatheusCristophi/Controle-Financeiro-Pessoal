@@ -17,10 +17,10 @@ interface user{
   balance:bigint;
 }
 
-function showPerfil():void{
+/*function showPerfil():void{
   perfil.innerHTML = `
   <h3>${name}</h3>
   `
-}
+}*/
 
 let perfil = document.getElementById("perfil-user");

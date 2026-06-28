@@ -1,0 +1,59 @@
+#header {
+    position: sticky;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+
+#nav-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: rgb(8, 8, 8);
+    height: 10vh;
+    width: 100%;
+}
+
+#header h1 {
+    background-color: rgb(8, 8, 8);
+    margin-left: 10vh;
+}
+
+#header h1:hover {
+    cursor: pointer;
+}
+
+#ul-header {
+    display: flex;
+    gap: 30px;
+    margin-left: auto;
+    margin-right: 10vh;
+    background-color: rgb(8, 8, 8);   
+}
+
+.li-header {
+    background-color: rgb(8, 8, 8);
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+.li-header:hover {
+    cursor: pointer;
+}
+
+#logout {
+    position: fixed;
+    top: 2vh;
+    right: 2vh;
+    height: 5vh;
+    width: 8vh;
+    border-radius: 1vh;
+    background-color: rgb(139, 201, 209);
+    color: black;
+    border: 1px solid black;
+}
+
+#logout:hover {
+    background-color: rgb(58, 58, 58);
+    cursor: pointer;
+}
