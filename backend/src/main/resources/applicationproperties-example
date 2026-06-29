@@ -15,7 +15,7 @@ spring.jpa.properties.hibernate.format_sql=true
 
 #Segurança
 
-#JWT_SECRET=${JWT_SECRET}
+#SecretToken=${JWT_SECRET}
 
 #Flyway
 
