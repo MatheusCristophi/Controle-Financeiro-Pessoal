@@ -1,4 +1,4 @@
-import { Component, SecurityContext, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -10,17 +10,3 @@ import { RouterOutlet } from '@angular/router';
 export class App {
   protected readonly title = signal('frontend');
 }
-
-interface user{
-  name:string;
-  email:string;
-  balance:bigint;
-}
-
-/*function showPerfil():void{
-  perfil.innerHTML = `
-  <h3>${name}</h3>
-  `
-}*/
-
-let perfil = document.getElementById("perfil-user");
