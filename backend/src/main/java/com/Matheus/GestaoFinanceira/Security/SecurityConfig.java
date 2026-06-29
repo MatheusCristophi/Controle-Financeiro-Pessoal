@@ -2,7 +2,9 @@ package com.Matheus.GestaoFinanceira.Security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -32,14 +34,9 @@ public class SecurityConfig {
     }
 
     @Bean
-    UserDetailsService userDetailsService(PasswordEncoder encoder){
-        String adminPassword = encoder.encode("admin");
-        String userPassword = encoder.encode("user");
-        UserDetails admin = User.withUsername("admin")
-                .password(adminPassword).roles("USER", "ADMIN").build();
-        UserDetails user = User.withUsername("user")
-                .password(userPassword).roles("USER").build();
-        return new InMemoryUserDetailsManager(admin, user);
+    AuthenticationManager authenticationManager(
+            AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
 
     @Bean

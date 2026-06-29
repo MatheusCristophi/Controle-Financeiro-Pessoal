@@ -1,4 +1,4 @@
-package com.Matheus.GestaoFinanceira.Security;
+package com.Matheus.GestaoFinanceira.Config;
 
 import com.Matheus.GestaoFinanceira.Exceptions.security.TokenCreateException;
 import com.Matheus.GestaoFinanceira.User.entity.User;

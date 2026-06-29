@@ -6,6 +6,7 @@ import com.Matheus.GestaoFinanceira.User.entity.User;
 import com.Matheus.GestaoFinanceira.User.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
@@ -20,6 +21,7 @@ public class UserService {
         this.encoder = encoder;
     }
 
+    @Transactional
     public User updateUser(UserRequest user, UUID id){
         User userSave = repository.findById(id)
                 .orElseThrow(() -> new IdNotFoundException(id));
@@ -36,6 +38,7 @@ public class UserService {
             return repository.save(userSave);
     }
 
+    @Transactional
     public void deleteUser(UUID id){
         repository.deleteById(id);
     }

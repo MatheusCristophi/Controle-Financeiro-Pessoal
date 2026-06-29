@@ -10,6 +10,7 @@ import com.Matheus.GestaoFinanceira.Transactions.repository.IncomesRepository;
 import com.Matheus.GestaoFinanceira.Transactions.repository.TransactionRepository;
 import com.Matheus.GestaoFinanceira.User.entity.User;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -27,26 +28,28 @@ public class TransactionService {
         this.IRepository = IRepository;
     }
 
-    //Todas independente do tipo
+    @Transactional(readOnly = true)
     public List<Transaction> getAllTransactions(User user){
         return TRepository.findAllByUserId(user.getId());
     }
 
-    //busca pelo id independente do tipo
+    @Transactional(readOnly = true)
     public Transaction getTransactionById(UUID id){
         return TRepository.findById(id)
                 .orElseThrow(() -> new IdNotFoundException(id));
     }
 
+    @Transactional(readOnly = true)
     public List<Income> getAllIncomes(User user){
         return IRepository.getAllIncomesByUserId(user.getId());
     }
 
-    //retornar todas despesas
+    @Transactional(readOnly = true)
     public List<Expenses> getAllExpenses(User user){
         return ERepository.getAllExpensesByUserId(user.getId());
     }
 
+    @Transactional
     public Income createIncomes(TransactionRequest request, User user) {
         Income income = new Income();
 
@@ -62,6 +65,7 @@ public class TransactionService {
         return TRepository.save(income);
     }
 
+    @Transactional
     public Expenses createExpenses(TransactionRequest request, User user) {
         Expenses expenses = new Expenses();
 
@@ -77,6 +81,7 @@ public class TransactionService {
         return TRepository.save(expenses);
     }
 
+    @Transactional
     public Transaction updateTransaction(UUID id, TransactionRequest request, User user) {
         Transaction transactionSaved = TRepository.findById(id)
                 .orElseThrow(() -> new IdNotFoundException(id));
@@ -98,6 +103,7 @@ public class TransactionService {
         return TRepository.save(transactionSaved);
     }
 
+    @Transactional
     public void deleteTransaction(UUID id){
         TRepository.deleteById(id);
     }
