@@ -1,0 +1,25 @@
+.footer {
+    background-color: #dbd5ff;
+    gap: 7vh;
+}
+
+.footer span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1vh;
+    height: 3vh;
+    color: white;
+}
+
+span h3 {
+    color: #1A1A2E;
+}
+
+span p {
+    color: black;
+}
+
+a {
+    text-decoration: none;
+}

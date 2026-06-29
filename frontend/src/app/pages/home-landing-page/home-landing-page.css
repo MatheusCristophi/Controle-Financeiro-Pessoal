@@ -1,0 +1,108 @@
+main {
+    background-color: #F8F7FF;
+}
+
+.main-section {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 100%;
+    height: 80vh;
+    gap: 5vh;
+}
+
+.main-title h1 {
+    color: #1A1A2E;
+    text-align: center;
+    font-size: 74px;
+}
+
+.text {
+    text-align: center;
+    font-size: 28px;
+    color: #6B7280;
+}
+
+.button-home {
+    background-color: #7C3AED;
+    border-radius: 2vh;
+    border: #7C3AED;
+    color: white;
+    width: 20vh;
+    height: 6vh;
+}
+
+.button-home:hover {
+    cursor: pointer;
+    background-color: #5b1fc4;
+}
+
+.img-home {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 5vh;
+    
+}
+
+.img-home img {
+    border-radius: 2vh;
+    box-shadow: 0 0 7px #7C3AED;
+}
+
+
+.prices-h1 {
+    display: flex;
+    justify-content: center;
+    margin-top: 5vh;
+    color: #1A1A2E;
+}
+
+.prices-h1 h2 {
+    flex-direction: row;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 20vh;
+}
+
+.card h3 {
+    color: white;
+    margin: 4vh 0;
+    font-size: 30px;
+}
+
+.card li {
+    justify-self: center;
+    text-align: justify;
+    list-style-type: none;
+    padding-right: 5px;
+    color: white;
+    font-size: 20px;
+}
+
+.card button {
+    color: white;
+    width: 10vh;
+    height: 4vh;
+    margin-top: 5vh;
+    background-color: #1A1A2E;
+    border-radius: 1vh;
+    border: #1A1A2E;
+}
+
+.card button:hover {
+    cursor: pointer;
+    background-color: #36364d;
+}
+
+.card {
+    margin: 7vh 0;
+    border-radius: 2vh;
+    box-shadow: 0 0 10px #7C3AED;
+    text-align: center;
+    width: 30vh;
+    height: 40vh;
+}
