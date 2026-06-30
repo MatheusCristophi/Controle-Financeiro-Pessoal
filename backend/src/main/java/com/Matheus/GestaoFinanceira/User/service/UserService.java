@@ -27,7 +27,7 @@ public class UserService {
                 .orElseThrow(() -> new IdNotFoundException(id));
 
         if (!user.email().isBlank()) {
-            userSave.setEmail(user.email());
+            userSave.setEmail(user.email().toLowerCase());
         }
         if (!user.name().isBlank()){
             userSave.setName(user.name());

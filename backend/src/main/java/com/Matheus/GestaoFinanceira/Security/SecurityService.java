@@ -27,7 +27,7 @@ public class SecurityService implements UserDetailsService {
         User user = new User();
 
         user.setName(name);
-        user.setEmail(email);
+        user.setEmail(email.toLowerCase());
         user.setPassword(encoder.encode(password));
         user.setRole(Roles.USER);
         
@@ -36,11 +36,9 @@ public class SecurityService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findByEmail(email.toLowerCase());
-
-        if (user.isPresent()) {
-            return user.get();
-        }
-            throw new UsernameNotFoundException("Email ou Senha Incorretos");
+        User user = userRepository.findByEmail(email.toLowerCase())
+        .orElseThrow(() -> new UsernameNotFoundException("email não encontrado"));
+        return new org.springframework.security.core.userdetails.User(
+            user.getEmail(), user.getPassword(), user.getAuthorities());
     }
 }

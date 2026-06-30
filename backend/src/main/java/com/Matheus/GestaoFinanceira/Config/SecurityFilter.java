@@ -1,5 +1,6 @@
 package com.Matheus.GestaoFinanceira.Config;
 
+import com.Matheus.GestaoFinanceira.Exceptions.security.UserNotFoundException;
 import com.Matheus.GestaoFinanceira.User.entity.User;
 import com.Matheus.GestaoFinanceira.User.repository.UserRepository;
 import jakarta.servlet.FilterChain;
@@ -28,7 +29,8 @@ public class SecurityFilter extends OncePerRequestFilter {
         var login = tokenService.verifyToken(token);
 
         if (login != null) {
-            Optional<User> user = userRepository.findByEmail(login);
+            User user = userRepository.findByEmail(login)
+            .orElseThrow(() -> new UserNotFoundException());
             var authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
             var authentication = new UsernamePasswordAuthenticationToken(user, null, authorities);
             SecurityContextHolder.getContext().setAuthentication(authentication);
