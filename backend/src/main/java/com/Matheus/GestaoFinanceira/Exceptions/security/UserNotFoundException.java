@@ -1,7 +1,7 @@
 package com.Matheus.GestaoFinanceira.Exceptions.security;
 
-public class UsernameNotFoundException extends RuntimeException {
-    public UsernameNotFoundException() {
+public class UserNotFoundException extends RuntimeException {
+    public UserNotFoundException() {
         super("Usuario não encontrado");
     }
 }

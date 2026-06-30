@@ -1,7 +1,7 @@
 package com.Matheus.GestaoFinanceira.Exceptions.handler;
 
 import com.Matheus.GestaoFinanceira.Exceptions.global.IdNotFoundException;
-import com.Matheus.GestaoFinanceira.Exceptions.security.UsernameNotFoundException;
+import com.Matheus.GestaoFinanceira.Exceptions.security.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,8 +20,8 @@ public class GlobalHandler {
         return problemDetail;
     }
 
-    @ExceptionHandler(UsernameNotFoundException.class)
-    public ProblemDetail usernameNotFoundHandler(UsernameNotFoundException exception) {
+    @ExceptionHandler(UserNotFoundException.class)
+    public ProblemDetail userNotFoundHandler(UserNotFoundException exception) {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
                 HttpStatus.NOT_FOUND, "Usuário não encontrado"
         );

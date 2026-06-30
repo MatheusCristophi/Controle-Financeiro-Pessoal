@@ -1,10 +1,12 @@
 package com.Matheus.GestaoFinanceira.Security;
 
+import java.util.Optional;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.Matheus.GestaoFinanceira.Exceptions.security.UsernameNotFoundException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.Matheus.GestaoFinanceira.User.entity.Roles;
 import com.Matheus.GestaoFinanceira.User.entity.User;
@@ -34,7 +36,11 @@ public class SecurityService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException());
+        Optional<User> user = userRepository.findByEmail(email.toLowerCase());
+
+        if (user.isPresent()) {
+            return user.get();
+        }
+            throw new UsernameNotFoundException("Email ou Senha Incorretos");
     }
 }

@@ -2,14 +2,13 @@ package com.Matheus.GestaoFinanceira.Security;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Matheus.GestaoFinanceira.DTOs.user.UserRequest;
 import com.Matheus.GestaoFinanceira.DTOs.user.UserResponse;
 
-@RestController
+@RestController("/auth/v1")
 public class SecurityController {
     
     private final SecurityService service;
@@ -24,6 +23,6 @@ public class SecurityController {
         return new ResponseEntity<>(UserResponse.toUser(user), HttpStatus.CREATED);
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<String>
+//    @PostMapping("/login")
+//    public ResponseEntity<String>
 }
