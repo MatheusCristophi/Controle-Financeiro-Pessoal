@@ -1,7 +1,33 @@
 <app-login-header />
 
 <main>
-    
+    <div class="title-login">
+        <h1>Bem vindo</h1>
+        <h1 style="color: #4F46E5;">De volta</h1>
+
+    </div>
+    <p class="f">Acesse sua conta e continue de onde parou.</p>
+    <div class="main-div">
+
+        <form class="formlogin">
+            <p>Email</p>
+            <input type="text" placeholder="Email">
+            <div class="div-passwordf">
+                <p>Senha</p> <span><a href="">Esqueceu a senha?</a></span>
+            </div>
+            <input type="text" placeholder="Senha">
+            <button class="log-button">Entrar na Conta</button>
+            <div class="or">
+                <hr>
+                <p> OU </p>
+                <hr>
+            </div>
+            <div class="buttons-login">
+                <button><img ngSrc="/google.png" width="50" height="50" priority></button>
+                <button><img ngSrc="/github.png" width="50" height="50" priority></button>
+            </div>
+        </form>
+    </div>
 </main>
 
 <app-login-footer />

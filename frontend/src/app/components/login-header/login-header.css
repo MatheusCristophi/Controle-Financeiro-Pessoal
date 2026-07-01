@@ -28,4 +28,9 @@
         border: 1px #5b1fc4 solid;
         border-radius: 2vh;
     }
+
+    button:hover {
+        background-color: #5b1fc4;
+        cursor: pointer;
+    }
 }
