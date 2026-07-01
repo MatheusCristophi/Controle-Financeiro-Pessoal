@@ -1,0 +1,19 @@
+.logo-header {
+    background-color: white;
+}
+
+.logo-header a {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    background-color: white;
+    margin-left: 4vh;
+    width: 6vh;
+    height: 6vh;
+    text-decoration: none;
+}
+
+.logo-header h1 {
+    background-color: white;
+    color: #1A1A2E;
+}

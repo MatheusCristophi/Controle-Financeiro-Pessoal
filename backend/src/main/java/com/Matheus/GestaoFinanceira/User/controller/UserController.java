@@ -7,9 +7,8 @@ import com.Matheus.GestaoFinanceira.User.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/user/v1")
@@ -22,17 +21,17 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<UserResponse> updateUser(@PathVariable @RequestParam UUID id,
+    @PutMapping("/update")
+    public ResponseEntity<UserResponse> updateUser(@AuthenticationPrincipal User user,
                                                    @RequestBody UserRequest request){
-        User user = userService.updateUser(request, id);
+        User userS = userService.updateUser(request, user.getId());
 
-        return new ResponseEntity<>(UserResponse.toUser(user), HttpStatus.CREATED);
+        return new ResponseEntity<>(UserResponse.toUser(userS), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable @RequestParam UUID id){
-        userService.deleteUser(id);
+    @DeleteMapping("/delete")
+    public ResponseEntity<Void> deleteUser(@AuthenticationPrincipal User user){
+        userService.deleteUser(user.getId());
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
