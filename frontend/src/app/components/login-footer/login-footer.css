@@ -1,0 +1,15 @@
+.foot {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 6vh;
+    background-color: #F8F7FF;
+
+    a{
+        text-decoration: none;
+    }
+}

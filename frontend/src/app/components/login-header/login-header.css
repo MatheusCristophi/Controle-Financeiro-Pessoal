@@ -1,19 +1,31 @@
 .logo-header {
-    background-color: white;
-}
-
-.logo-header a {
+    background-color: #F8F7FF;
     display: flex;
-    gap: 15px;
+    justify-content: space-between;
     align-items: center;
-    background-color: white;
-    margin-left: 4vh;
-    width: 6vh;
-    height: 6vh;
-    text-decoration: none;
-}
+    height: 8vh;
 
-.logo-header h1 {
-    background-color: white;
-    color: #1A1A2E;
+    h1 {
+        color: #1A1A2E;
+    }
+
+    a {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        margin-left: 4vh;
+        width: 6vh;
+        height: 6vh;
+        text-decoration: none;
+    }
+
+    button {
+        margin-right: 4vh;
+        color: white;
+        width: 11vh;
+        height: 5vh;
+        background-color: #7C3AED;
+        border: 1px #5b1fc4 solid;
+        border-radius: 2vh;
+    }
 }
