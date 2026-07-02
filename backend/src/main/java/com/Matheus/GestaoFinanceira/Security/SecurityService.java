@@ -1,5 +1,6 @@
 package com.Matheus.GestaoFinanceira.Security;
 
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -11,7 +12,7 @@ import com.Matheus.GestaoFinanceira.Config.TokenService;
 import com.Matheus.GestaoFinanceira.DTOs.security.SecurityLoginRequest;
 import com.Matheus.GestaoFinanceira.DTOs.security.SecurityRegisterRequest;
 import com.Matheus.GestaoFinanceira.DTOs.security.SecurityResponse;
-import com.Matheus.GestaoFinanceira.Exceptions.security.UserNotFoundException;
+import com.Matheus.GestaoFinanceira.Exceptions.security.*;
 import com.Matheus.GestaoFinanceira.User.entity.Roles;
 import com.Matheus.GestaoFinanceira.User.entity.User;
 import com.Matheus.GestaoFinanceira.User.repository.UserRepository;
@@ -24,11 +25,11 @@ public class SecurityService implements UserDetailsService {
     private final TokenService tokenService;
     private final PasswordEncoder encoder;
 
-    public SecurityService(UserRepository userRepository, PasswordEncoder encoder, BCryptPasswordEncoder passwordEncoder, TokenService tokenService, SecurityResponse securityResponse) {
-        this.userRepository = userRepository;
-        this.encoder = encoder;
+    public SecurityService(BCryptPasswordEncoder passwordEncoder, UserRepository userRepository, TokenService tokenService, PasswordEncoder encoder) {
         this.passwordEncoder = passwordEncoder;
+        this.userRepository = userRepository;
         this.tokenService = tokenService;
+        this.encoder = encoder;
     }
 
     public User register(SecurityRegisterRequest request) {
@@ -44,18 +45,18 @@ public class SecurityService implements UserDetailsService {
 
     public SecurityResponse login(SecurityLoginRequest request) {
         User user = userRepository.findByEmail(request.email())
-        .orElseThrow(() -> new UserNotFoundException());
-        if (passwordEncoder.matches(request.password(), user.getPassword())){
+                .orElseThrow(() -> new UserNotFoundException());
+        if (passwordEncoder.matches(request.password(), user.getPassword())) {
             String token = tokenService.generateToken(user);
-            return new SecurityResponse(user.getName(), user.getEmail(), token);
+            return new SecurityResponse(user.getEmail(), token);
         }
-        return null;
+        throw new BadCredentialsException("Email ou senha inválidos");
     }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email.toLowerCase())
-                .orElseThrow(() -> new UsernameNotFoundException("email não encontrado"));
+                .orElseThrow(() -> new UsernameNotFoundException("Email ou senha inválidos."));
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(), user.getPassword(), user.getAuthorities());
     }

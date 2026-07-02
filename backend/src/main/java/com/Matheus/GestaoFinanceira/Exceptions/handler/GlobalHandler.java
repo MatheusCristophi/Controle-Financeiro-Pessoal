@@ -2,9 +2,9 @@ package com.Matheus.GestaoFinanceira.Exceptions.handler;
 
 import com.Matheus.GestaoFinanceira.Exceptions.global.IdNotFoundException;
 import com.Matheus.GestaoFinanceira.Exceptions.security.TokenCreateException;
-import com.Matheus.GestaoFinanceira.Exceptions.security.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -35,10 +35,10 @@ public class GlobalHandler {
         return problemDetail;
     }
 
-    @ExceptionHandler(UserNotFoundException.class)
-    public ProblemDetail userNotFoundHandler(UserNotFoundException exception) {
+    @ExceptionHandler(BadCredentialsException.class)
+    public ProblemDetail badCredentialsHandler(BadCredentialsException exception) {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
-                HttpStatus.NOT_FOUND, "Usuário não encontrado"
+                HttpStatus.UNAUTHORIZED, "Email ou senha inválidos."
                 
         );
 
@@ -46,7 +46,4 @@ public class GlobalHandler {
         problemDetail.setType(java.net.URI.create("about:blank"));
         return problemDetail;
     }
-
-
-
 }

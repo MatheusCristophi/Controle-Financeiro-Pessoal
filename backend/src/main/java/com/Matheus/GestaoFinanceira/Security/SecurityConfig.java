@@ -1,5 +1,6 @@
 package com.Matheus.GestaoFinanceira.Security;
 
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,9 +21,9 @@ import com.Matheus.GestaoFinanceira.Config.SecurityFilter;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    private final SecurityFilter securityFilter;
+    private final ObjectProvider<SecurityFilter> securityFilter;
 
-    SecurityConfig(SecurityFilter securityFilter) {
+    SecurityConfig(ObjectProvider<SecurityFilter> securityFilter) {
         this.securityFilter = securityFilter;
     }
 
@@ -37,7 +38,7 @@ public class SecurityConfig {
                     auth.requestMatchers("/auth/v1/registrar").permitAll();
                     auth.anyRequest().authenticated();
                 })
-                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(securityFilter.getObject(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
@@ -49,6 +50,6 @@ public class SecurityConfig {
 
     @Bean
     BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(14);
     }
 }

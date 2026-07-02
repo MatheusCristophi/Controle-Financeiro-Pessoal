@@ -20,8 +20,8 @@ public class SecurityController {
     
     private final SecurityService service;
 
-    SecurityController(SecurityService service){
-        this.service = service;
+    public SecurityController(SecurityService securityService) {
+        this.service = securityService;
     }
 
     @PostMapping("/registrar")
@@ -32,7 +32,7 @@ public class SecurityController {
 
     @PostMapping("/login")
     public ResponseEntity<SecurityResponse> login (@RequestBody @Valid SecurityLoginRequest request) {
-        service.login(request);
-        return ResponseEntity.ok(new SecurityResponse());
+        SecurityResponse response = service.login(request);
+        return ResponseEntity.ok(response);
     }
 }
