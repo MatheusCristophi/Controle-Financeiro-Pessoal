@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { LoginHeader } from "../../components/login-header/login-header";
-import { LoginFooter } from "../../components/login-footer/login-footer";
+import { RegisterHeader } from "../../components/register-header/register-header";
+import { RegisterFooter } from "../../components/register-footer/register-footer";
 
 @Component({
   selector: 'app-register',
-  imports: [LoginHeader, LoginFooter],
+  imports: [RegisterHeader, RegisterFooter],
   templateUrl: './register.html',
   styleUrl: './register.css',
 })

@@ -9,7 +9,7 @@
         color: #1A1A2E;
     }
 
-    a {
+    .logo {
         display: flex;
         gap: 15px;
         align-items: center;
