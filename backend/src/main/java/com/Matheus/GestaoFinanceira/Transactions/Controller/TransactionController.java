@@ -4,6 +4,9 @@ import com.Matheus.GestaoFinanceira.DTOs.transaction.TransactionRequest;
 import com.Matheus.GestaoFinanceira.DTOs.transaction.TransactionResponse;
 import com.Matheus.GestaoFinanceira.Transactions.service.TransactionService;
 import com.Matheus.GestaoFinanceira.User.entity.User;
+
+import jakarta.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -61,7 +64,7 @@ public class TransactionController {
     }
 
     @PostMapping("/incomes/create")
-    public ResponseEntity<TransactionResponse> createIncome(@RequestBody TransactionRequest request,
+    public ResponseEntity<TransactionResponse> createIncome(@RequestBody @Valid TransactionRequest request,
                                                                  @AuthenticationPrincipal User user){
         var response = TransactionResponse.toTransaction(service.createIncomes(request, user));
 
@@ -69,7 +72,7 @@ public class TransactionController {
     }
 
     @PostMapping("/expenses/create")
-    public ResponseEntity<TransactionResponse> createExpense(@RequestBody TransactionRequest request,
+    public ResponseEntity<TransactionResponse> createExpense(@RequestBody @Valid TransactionRequest request,
                                                              @AuthenticationPrincipal User user){
         var response = TransactionResponse.toTransaction(service.createExpenses(request, user));
 
@@ -77,7 +80,7 @@ public class TransactionController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<TransactionResponse> updateTransaction(@RequestBody TransactionRequest request,
+    public ResponseEntity<TransactionResponse> updateTransaction(@RequestBody @Valid TransactionRequest request,
                                                                  @AuthenticationPrincipal User user
                                                                  ){
         var response = TransactionResponse.toTransaction(service.updateTransaction(user.getId(), request, user));

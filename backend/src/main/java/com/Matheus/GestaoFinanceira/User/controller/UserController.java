@@ -4,6 +4,9 @@ import com.Matheus.GestaoFinanceira.DTOs.user.UserRequest;
 import com.Matheus.GestaoFinanceira.DTOs.user.UserResponse;
 import com.Matheus.GestaoFinanceira.User.entity.User;
 import com.Matheus.GestaoFinanceira.User.service.UserService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,7 +26,7 @@ public class UserController {
 
     @PutMapping("/update")
     public ResponseEntity<UserResponse> updateUser(@AuthenticationPrincipal User user,
-                                                   @RequestBody UserRequest request){
+                                                   @RequestBody @Valid UserRequest request){
         User userS = userService.updateUser(request, user.getId());
 
         return new ResponseEntity<>(UserResponse.toUser(userS), HttpStatus.CREATED);

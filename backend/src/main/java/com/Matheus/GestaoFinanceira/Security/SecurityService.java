@@ -19,7 +19,6 @@ import com.Matheus.GestaoFinanceira.User.repository.UserRepository;
 @Service
 public class SecurityService implements UserDetailsService {
 
-    private final SecurityResponse securityResponse;
     private final BCryptPasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final TokenService tokenService;
@@ -30,7 +29,6 @@ public class SecurityService implements UserDetailsService {
         this.encoder = encoder;
         this.passwordEncoder = passwordEncoder;
         this.tokenService = tokenService;
-        this.securityResponse = securityResponse;
     }
 
     public User register(SecurityRegisterRequest request) {
@@ -47,7 +45,7 @@ public class SecurityService implements UserDetailsService {
     public SecurityResponse login(SecurityLoginRequest request) {
         User user = userRepository.findByEmail(request.email())
         .orElseThrow(() -> new UserNotFoundException());
-        if (passwordEncoder.matches(user.getPassword(), request.password())){
+        if (passwordEncoder.matches(request.password(), user.getPassword())){
             String token = tokenService.generateToken(user);
             return new SecurityResponse(user.getName(), user.getEmail(), token);
         }

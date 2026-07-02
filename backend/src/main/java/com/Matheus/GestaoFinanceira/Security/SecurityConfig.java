@@ -30,7 +30,6 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .oauth2Client(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults())
                 .logout(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> {
